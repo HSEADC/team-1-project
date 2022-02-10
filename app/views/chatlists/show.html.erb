@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @chatlist.id %>
+</p>
+
+<p>
+  <strong>Quited:</strong>
+  <%= @chatlist.quited %>
+</p>
+
+<%= link_to 'Edit', edit_chatlist_path(@chatlist) %> |
+<%= link_to 'Back', chatlists_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Chatlists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Quited</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @chatlists.each do |chatlist| %>
+      <tr>
+        <td><%= chatlist.id %></td>
+        <td><%= chatlist.quited %></td>
+        <td><%= link_to 'Show', chatlist %></td>
+        <td><%= link_to 'Edit', edit_chatlist_path(chatlist) %></td>
+        <td><%= link_to 'Destroy', chatlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Chatlist', new_chatlist_path %>

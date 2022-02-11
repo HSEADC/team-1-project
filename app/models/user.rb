@@ -1,8 +1,7 @@
-
 class User < ApplicationRecord
   has_one :profile
 
-  has_many :chatlist
+  has_many :chatlists
   has_many :chats, :through => :chatlist
 
   has_many :favourites
@@ -10,6 +9,6 @@ class User < ApplicationRecord
 
   has_many :messages
 
-  has_one :blocker
-  has_many :blocked
+  has_many :blocker_users
+  has_many :blocked_users
 end

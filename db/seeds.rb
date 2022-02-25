@@ -10,7 +10,7 @@ def seed
   reset_db
   create_users
   create_chats
-  create_messages
+  # create_messages
 end
 
 def reset_db
@@ -20,28 +20,29 @@ def reset_db
 end
 
 def create_users
-  50 times do
+  20.times do
     user = User.create!
     puts "User created with id #{user.id}"
   end
 end
 
 def create_chats
-  10 times do
-    users = User.all.sample(2)
+  10.times do
+    users = User.all.select(2)
     chat = Chat.create!
-    users[0].user_chats.create!(chat_id: chat.id)
-    users[1].user_chats.create!(chat_id: chat.id)
+    puts "Chat created with id #{chat.id}"
+    users[0].chat_list_items.create!(chat_id: chat.id)
+    users[1].chat_list_items.create!(chat_id: chat.id)
   end
 end
-
-def create_messages
-  chats = Chat.all
-  chats.each do |chat|
-    chat_users = chat.users
-    message = chat.messages.create!(user_id: user.id, body: 'u up?')
-  end
-end
+#
+# def create_messages
+#   chats = Chat.all
+#   chats.each do |chat|
+#     chat_users = chat.users
+#     message = chat.messages.create!(user_id: user.id, body: 'u up?')
+#   end
+# end
 
 
 # User.all.sample   ---  random user

@@ -18,14 +18,13 @@ ActiveRecord::Schema.define(version: 2022_02_10_121723) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "chatlists", force: :cascade do |t|
-    t.boolean "quited"
+  create_table "chat_list_items", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id", null: false
-    t.integer "chats_id"
-    t.index ["chats_id"], name: "index_chatlists_on_chats_id"
-    t.index ["user_id"], name: "index_chatlists_on_user_id"
+    t.integer "user_id"
+    t.integer "chat_id"
+    t.index ["chat_id"], name: "index_chat_list_items_on_chat_id"
+    t.index ["user_id"], name: "index_chat_list_items_on_user_id"
   end
 
   create_table "chats", force: :cascade do |t|
@@ -97,8 +96,8 @@ ActiveRecord::Schema.define(version: 2022_02_10_121723) do
     t.index ["profile_id"], name: "index_users_on_profile_id"
   end
 
-  add_foreign_key "chatlists", "chats", column: "chats_id"
-  add_foreign_key "chatlists", "users"
+  add_foreign_key "chat_list_items", "chats"
+  add_foreign_key "chat_list_items", "users"
   add_foreign_key "favourites", "profiles", column: "profiles_id"
   add_foreign_key "favourites", "users", column: "users_id"
   add_foreign_key "message_statuses", "messages"

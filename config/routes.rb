@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :chatlists
+  resources :chat_list_items
   resources :blocklists
   resources :favourites
   resources :message_statuses

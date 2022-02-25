@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   has_one :profile
 
-  has_many :chatlists
-  has_many :chats, :through => :chatlist
+  has_many :chat_list_items
+  has_many :chats, :through => :chat_list_items
 
   has_many :favourites
   has_many :saved_profiles, :through => :favourites, class_name: "Profile", foreign_key: :profile_id

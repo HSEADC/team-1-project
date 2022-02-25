@@ -1,6 +1,6 @@
 require "test_helper"
 
-class ChatlistTest < ActiveSupport::TestCase
+class ChatListItemTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

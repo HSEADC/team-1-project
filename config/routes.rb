@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :chat_list_items
   resources :blocklists
   resources :favourites

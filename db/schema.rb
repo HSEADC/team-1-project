@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_10_121723) do
+ActiveRecord::Schema.define(version: 2022_03_07_143750) do
 
   create_table "blocklists", force: :cascade do |t|
     t.string "type"
@@ -35,13 +35,14 @@ ActiveRecord::Schema.define(version: 2022_02_10_121723) do
   create_table "favourites", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "profiles_id"
-    t.integer "users_id", null: false
-    t.index ["profiles_id"], name: "index_favourites_on_profiles_id"
-    t.index ["users_id"], name: "index_favourites_on_users_id"
+    t.integer "profile_id"
+    t.integer "user_id", null: false
+    t.index ["profile_id"], name: "index_favourites_on_profile_id"
+    t.index ["user_id"], name: "index_favourites_on_user_id"
   end
 
   create_table "message_statuses", force: :cascade do |t|
+    t.boolean "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "message_id", null: false
@@ -89,17 +90,23 @@ ActiveRecord::Schema.define(version: 2022_02_10_121723) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "profile_id"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["profile_id"], name: "index_users_on_profile_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "chat_list_items", "chats"
   add_foreign_key "chat_list_items", "users"
-  add_foreign_key "favourites", "profiles", column: "profiles_id"
-  add_foreign_key "favourites", "users", column: "users_id"
+  add_foreign_key "favourites", "profiles"
+  add_foreign_key "favourites", "users"
   add_foreign_key "message_statuses", "messages"
   add_foreign_key "message_statuses", "users"
   add_foreign_key "messages", "chats"

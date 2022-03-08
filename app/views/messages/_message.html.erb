@@ -1,0 +1,5 @@
+<div class="message <%= message.user == current_user ? 'currentUser' : '' %>">
+  <p class="user_name"><%= message.user.profile.name %></p>
+  <div><%= message.body %></div>
+  <%= message.created_at %>
+</div>

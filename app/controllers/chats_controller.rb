@@ -4,11 +4,16 @@ class ChatsController < ApplicationController
 
   # GET /chats or /chats.json
   def index
-    @chats = Chat.all
+    @chats = current_user.chats
   end
 
   # GET /chats/1 or /chats/1.json
   def show
+    chat_members = @chat.users.ids
+    other_user_id = chat_members.delete(current_user.id)
+    other_user = User.where(id: other_user_id).first
+    @other_user_name = other_user.profile.name
+    @messages = @chat.messages
   end
 
   # GET /chats/new

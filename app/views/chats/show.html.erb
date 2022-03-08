@@ -1,20 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Chat with:</strong>
-  <%= @chat.users.ids %>
+
+  <strong>Chat with <%= @other_user_name %></strong>
 </p>
 
-<table>
-  <tbody>
-    <% @chat.messages.each do |message| %>
-      <tr>
-        <td><%= message.user_id %></td>
-        <td><%= message.body %></td>
-        <td><%= message.created_at %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="messages">
+  <%= render @messages %>
+</div>
 
 <%= link_to 'Back', chats_path %>

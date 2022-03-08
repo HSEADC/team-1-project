@@ -1,3 +1,9 @@
+<% if can? :read, @profile %>
+  <%= 'True' %>
+<% else %>
+<%= 'False' %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -127,5 +133,7 @@
   <%= @profile.facebook_link %>
 </p>
 
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+  <div>
+    <%= link_to 'Edit', edit_profile_path(@profile) if can? :update, @profile %>
+    <%= link_to 'Destroy', @profile, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, @profile %>
+  </div>

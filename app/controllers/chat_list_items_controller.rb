@@ -1,4 +1,5 @@
 class ChatListItemsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_chat_list_item, only: %i[ show edit update destroy ]
 
   # GET /chat_list_items or /chat_list_items.json

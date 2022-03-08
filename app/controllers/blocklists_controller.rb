@@ -1,4 +1,5 @@
 class BlocklistsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_blocklist, only: %i[ show edit update destroy ]
 
   # GET /blocklists or /blocklists.json

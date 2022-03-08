@@ -1,4 +1,5 @@
 class MessageStatusesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_message_status, only: %i[ show edit update destroy ]
 
   # GET /message_statuses or /message_statuses.json

@@ -12,7 +12,7 @@ def seed
   create_chats
   create_messages
   create_profiles
-  create_favourites
+  # create_favourites
 end
 
 def reset_db
@@ -22,9 +22,18 @@ def reset_db
 end
 
 def create_users
-  20.times do
-    user = User.create!
-    # puts "User created with id #{user.id}"
+  i = 1
+  10.times do
+    user_data = {
+      email: "user#{i}@email.com",
+      password: "testtest"
+    }
+    if i == 1
+       user_data[:admin] = true
+    end
+    user = User.create!(user_data)
+    puts "User created with id #{user.id}"
+    i += 1
   end
 end
 

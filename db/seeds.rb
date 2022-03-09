@@ -22,19 +22,59 @@ def reset_db
 end
 
 def create_users
-  i = 1
-  10.times do
-    user_data = {
-      email: "user#{i}@email.com",
-      password: "testtest"
-    }
-    if i == 1
-       user_data[:admin] = true
-    end
-    user = User.create!(user_data)
-    puts "User created with id #{user.id}"
-    i += 1
-  end
+  # i = 1
+  # 10.times do
+  #   user_data = {
+  #     email: "user#{i}@email.com",
+  #     password: "testtest"
+  #   }
+  #   if i == 1
+  #      user_data[:admin] = true
+  #   end
+  #   user = User.create!(user_data)
+  #   puts "User created with id #{user.id}"
+  #   i += 1
+  # end
+
+  @vitaly = User.create!(email: "vitaly@email.com", password: "testtest", admin: true)
+  @mila = User.create!(email: "mila@email.com", password: "testtest", admin: true)
+  @eva = User.create!(email: "eva@email.com", password: "testtest", admin: true)
+end
+
+def create_profiles
+  vitaly_profile = Profile.create!(user_id: @vitaly.id,
+                                    name: "Виталий",
+                                    age: 20,
+                                    visibility: true,
+                                    gender: "He/him",
+                                    destination_city: "Санкт-Петербург",
+                                    interests: ["Дизайн", "Искусство"],
+                                    tidiness: 9,
+                                    smoking: true,
+                                    instagram_link: "http://instagram.com/vitasiempre")
+  vitaly_profile.avatar.attach(io: File.open('app/assets/images/vitaly.jpg'), filename: "vitaly.jpg")
+  mila_profile = Profile.create!(user_id: @mila.id,
+                                    name: "Мила",
+                                    age: 20,
+                                    visibility: true,
+                                    gender: "She/her",
+                                    destination_city: "Москва",
+                                    interests: ["Дизайн", "Искусство"],
+                                    tidiness: 9,
+                                    smoking: false,
+                                    instagram_link: "http://instagram.com/jethappiness")
+  mila_profile.avatar.attach(io: File.open('app/assets/images/mila.jpg'), filename: "vitaly.jpg")
+  eva_profile = Profile.create!(user_id: @eva.id,
+                                    name: "Ева",
+                                    age: 20,
+                                    visibility: true,
+                                    gender: "She/her",
+                                    destination_city: "Москва",
+                                    interests: ["Дизайн", "Искусство"],
+                                    tidiness: 9,
+                                    smoking: false,
+                                    instagram_link: "http://instagram.com/jethappiness")
+eva_profile.avatar.attach(io: File.open('app/assets/images/eva.jpg'), filename: "vitaly.jpg")
 end
 
 def create_chats
@@ -59,15 +99,6 @@ def create_messages
 
       # puts "Message #{message_one.id} #{message_one.body} sent by user #{message_one.user.id} to chat #{message_one.chat.id}. Status #{status_one.status}"
     end
-  end
-end
-
-def create_profiles
-  users = User.all
-  users.each do |user|
-    profile = Profile.create!(user_id: user.id, name: 'Person')
-
-    # puts "Profile #{user.profile.id} created for user #{user.id}"
   end
 end
 

@@ -1,5 +1,6 @@
 <h2><%= link_to profile.name , profile %></h2>
-<p><%= profile.user_id %></p>
+<%= render partial: "application/avatar", :locals => {:profile => profile} %>
+<p><%= profile.age %></p>
 
   <div>
     <%= link_to 'Edit', edit_profile_path(profile) if can? :update, profile %>

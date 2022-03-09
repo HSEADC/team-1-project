@@ -27,17 +27,26 @@
 
 <p>
   <strong>Avatar:</strong>
-  <%= @profile.photo %>
+  <% if @profile.avatar.attached? %>
+    <%= image_tag "#{url_for(@profile.avatar)}", style:"height:100px" %>
+  <% else %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Images:</strong>
+  <% if @profile.images.attached? %>
+    <% @profile.images.items do |image| %>
+      <%= image_tag "#{url_for(profile.avatar)}", style:"height:100px" %>
+    <% end %>
+  <% else %>
+    <%= "No images" %>
+  <% end %>
 </p>
 
 <p>
   <strong>Gender:</strong>
   <%= @profile.gender %>
-</p>
-
-<p>
-  <strong>Destination city:</strong>
-  <%= @profile.destination_city %>
 </p>
 
 <p>

@@ -1,0 +1,4 @@
+<% if profile.avatar.attached? %>
+  <%= image_tag "#{url_for(profile.avatar)}", style:"height:100px" %>
+<% else %>
+<% end %>

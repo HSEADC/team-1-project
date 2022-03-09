@@ -10,9 +10,8 @@ class ChatsController < ApplicationController
   # GET /chats/1 or /chats/1.json
   def show
     chat_members = @chat.users.ids
-    other_user_id = chat_members.delete(current_user.id)
-    other_user = User.where(id: other_user_id).first
-    @other_user_name = other_user.profile.name
+    chat_members.delete(current_user.id)
+    @other_user_name = User.where(id: chat_members).first.profile.name
     @messages = @chat.messages
   end
 

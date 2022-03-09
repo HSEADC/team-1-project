@@ -1,9 +1,9 @@
 <% chat_members = chat.users.ids %>
-<% other_user_id = chat_members.delete(current_user.id) %>
-<% other_user = User.where(id: other_user_id).first %>
-<% other_user_name = other_user.profile.name %>
-<h2><%= link_to other_user_name, chat %></h2>
+<% chat_members.delete(current_user.id) %>
+<% other_user = User.where(id: chat_members).first.profile %>
+<%= render partial: "application/avatar", :locals => {:profile => other_user} %>
+<h2><%= link_to other_user.name, chat %></h2>
 
 
 <%= link_to 'Destroy', chat, method: :delete, data: { confirm: 'Are you sure?' } %>
-<br><br>
+<br><br><br><br>

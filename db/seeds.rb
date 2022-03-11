@@ -1,18 +1,55 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+@users_data = [
+  {
+    email: 'vitaly@email.com',
+    admin: true,
+    name: 'Виталий',
+    age: 20,
+    visibility: true,
+    gender: 'He/him',
+    destination_city: 'Санкт-Петербург',
+    interests: ['Дизайн', 'Искусство'],
+    tidiness: 9,
+    smoking: true,
+    instagram_link: 'http://instagram.com/vitasiempre',
+    io: 'public/seed_content/vitaly.jpg',
+    filename: 'vitaly.jpg'
+  }, {
+    email: 'mila@email.com',
+    admin: true,
+    name: 'Мила',
+    age: 20,
+    visibility: true,
+    gender: 'She/her',
+    destination_city: 'Москва',
+    interests: ['Дизайн', 'Искусство'],
+    tidiness: 9,
+    smoking: false,
+    instagram_link: 'http://instagram.com/jethappiness',
+    io: 'public/seed_content/mila.jpg',
+    filename: 'mila.jpg'
+  }, {
+    email: 'eva@email.com',
+    admin: true,
+    name: 'Ева',
+    age: 20,
+    visibility: true,
+    gender: 'She/her',
+    destination_city: 'Москва',
+    interests: ['Дизайн', 'Искусство'],
+    tidiness: 9,
+    smoking: false,
+    instagram_link: 'http://instagram.com/jethappiness',
+    io: 'public/seed_content/eva.jpg',
+    filename: 'eva.jpg'
+  }
+]
 
 def seed
   reset_db
-  create_users
+  create_users_with_profiles
   create_chats
   create_messages
-  create_profiles
-  # create_favourites
+  create_favourites
 end
 
 def reset_db
@@ -21,60 +58,43 @@ def reset_db
   Rake::Task['db:migrate'].invoke
 end
 
-def create_users
-  # i = 1
-  # 10.times do
-  #   user_data = {
-  #     email: "user#{i}@email.com",
-  #     password: "testtest"
-  #   }
-  #   if i == 1
-  #      user_data[:admin] = true
-  #   end
-  #   user = User.create!(user_data)
-  #   puts "User created with id #{user.id}"
-  #   i += 1
-  # end
+def create_users_with_profiles
+  @users_data.each do |user_data|
+    user = create_user(user_data)
+    profile = create_profiles(user, user_data)
 
-  @vitaly = User.create!(email: "vitaly@email.com", password: "testtest", admin: true)
-  @mila = User.create!(email: "mila@email.com", password: "testtest", admin: true)
-  @eva = User.create!(email: "eva@email.com", password: "testtest", admin: true)
+    puts "User with name #{user.profile.name} created with email #{user.email}"
+  end
 end
 
-def create_profiles
-  vitaly_profile = Profile.create!(user_id: @vitaly.id,
-                                    name: "Виталий",
-                                    age: 20,
-                                    visibility: true,
-                                    gender: "He/him",
-                                    destination_city: "Санкт-Петербург",
-                                    interests: ["Дизайн", "Искусство"],
-                                    tidiness: 9,
-                                    smoking: true,
-                                    instagram_link: "http://instagram.com/vitasiempre")
-  vitaly_profile.avatar.attach(io: File.open('app/assets/images/vitaly.jpg'), filename: "vitaly.jpg")
-  mila_profile = Profile.create!(user_id: @mila.id,
-                                    name: "Мила",
-                                    age: 20,
-                                    visibility: true,
-                                    gender: "She/her",
-                                    destination_city: "Москва",
-                                    interests: ["Дизайн", "Искусство"],
-                                    tidiness: 9,
-                                    smoking: false,
-                                    instagram_link: "http://instagram.com/jethappiness")
-  mila_profile.avatar.attach(io: File.open('app/assets/images/mila.jpg'), filename: "vitaly.jpg")
-  eva_profile = Profile.create!(user_id: @eva.id,
-                                    name: "Ева",
-                                    age: 20,
-                                    visibility: true,
-                                    gender: "She/her",
-                                    destination_city: "Москва",
-                                    interests: ["Дизайн", "Искусство"],
-                                    tidiness: 9,
-                                    smoking: false,
-                                    instagram_link: "http://instagram.com/jethappiness")
-eva_profile.avatar.attach(io: File.open('app/assets/images/eva.jpg'), filename: "vitaly.jpg")
+def create_user(user_data)
+  User.create!(
+    email: user_data[:email],
+    admin: user_data[:admin],
+    password: "testtest"
+  )
+end
+
+def create_profiles(user, user_data)
+  profile = Profile.create!(
+    user_id: user.id,
+    name: user_data[:name],
+    age: user_data[:age],
+    visibility: user_data[:visibility],
+    gender: user_data[:gender],
+    destination_city: user_data[:destination_city],
+    interests: user_data[:interests],
+    tidiness: user_data[:tidiness],
+    smoking: user_data[:smoking],
+    instagram_link: user_data[:instagram_link]
+  )
+
+  profile.avatar.attach(
+    io: File.open(user_data[:io]),
+    filename: user_data[:filename]
+  )
+
+  profile
 end
 
 def create_chats
@@ -83,7 +103,7 @@ def create_chats
     chat = Chat.create!
     users[0].chat_list_items.create!(chat_id: chat.id)
     users[1].chat_list_items.create!(chat_id: chat.id)
-    # puts "Chat created with id #{chat.id}, users #{chat.users.ids}, chat list items #{chat.chat_list_items.ids}"
+    puts "Chat created with id #{chat.id}, users #{chat.users.ids}, chat list items #{chat.chat_list_items.ids}"
   end
 end
 
@@ -97,7 +117,7 @@ def create_messages
       status_one = MessageStatus.create!(message_id: message_one.id, user_id: chat_users[0].id, status: 0)
       status_two = MessageStatus.create!(message_id: message_two.id, user_id: chat_users[0].id, status: 1)
 
-      # puts "Message #{message_one.id} #{message_one.body} sent by user #{message_one.user.id} to chat #{message_one.chat.id}. Status #{status_one.status}"
+      puts "Message #{message_one.id} #{message_one.body} sent by user #{message_one.user.id} to chat #{message_one.chat.id}. Status #{status_one.status}"
     end
   end
 end
@@ -105,15 +125,16 @@ end
 def create_favourites
   3.times do
     users = User.all.sample(2)
-    profile = users[1].profile
-    users[0].favourites.create!(profile_id: profile.id)
-    followed = users[0].saved_profiles.target[0].profile_id
-    # followed = users[0].favourites.target[0].profiles_id
+    users[0].favourites.create!(profile_id: users[1].profile.id)
+    user_saved_profiles_ids = users[0].saved_profiles.collect { |saved_profile| saved_profile.id }
+    favourite_user_profile_id = users[1].profile.id
 
-    puts "User #{users[0].id} added user #{followed} to their favs"
+    if (user_saved_profiles_ids.include?(favourite_user_profile_id))
+      puts "User #{users[0].profile.name} added user #{users[1].profile.name} to their favs"
+    else
+      puts "Favouritisation failed"
+    end
   end
 end
-
-
 
 seed

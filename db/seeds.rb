@@ -58,6 +58,7 @@ def reset_db
   Rake::Task['db:migrate'].invoke
 end
 
+<<<<<<< HEAD
 def create_users_with_profiles
   @users_data.each do |user_data|
     user = create_user(user_data)
@@ -95,6 +96,21 @@ def create_profiles(user, user_data)
   )
 
   profile
+=======
+def create_users
+  i = 1
+  10.times do
+    user_data = {
+      email: "user#{i}@email.com",
+      password: "testtest"
+    }
+    if i == 1
+       user_data[:admin] = true
+    end
+    user = User.create!(user_data)
+    puts "User created with id #{user.id}"
+    i += 1
+  end
 end
 
 def create_chats
@@ -119,6 +135,15 @@ def create_messages
 
       puts "Message #{message_one.id} #{message_one.body} sent by user #{message_one.user.id} to chat #{message_one.chat.id}. Status #{status_one.status}"
     end
+  end
+end
+
+def create_profiles
+  users = User.all
+  users.each do |user|
+    profile = Profile.create!(user_id: user.id, name: 'Person')
+
+    # puts "Profile #{user.profile.id} created for user #{user.id}"
   end
 end
 

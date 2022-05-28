@@ -5,8 +5,6 @@ class FavouritesController < ApplicationController
   # GET /favourites or /favourites.json
   def index
     @favourites = Favourite.all
-
-    render json: @favourites
   end
 
   # GET /favourites/1 or /favourites/1.json

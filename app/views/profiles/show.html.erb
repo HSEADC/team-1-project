@@ -6,6 +6,11 @@
 </p>
 
 <p>
+  <strong>Avatar:</strong>
+  <%= image_tag @profile.avatar_url %>
+</p>
+
+<p>
   <strong>Name:</strong>
   <%= @profile.name %>
 </p>
@@ -25,24 +30,6 @@
   <%= @profile.visibility %>
 </p>
 
-<p>
-  <strong>Avatar:</strong>
-  <% if @profile.avatar.attached? %>
-    <%= image_tag "#{url_for(@profile.avatar)}", style:"height:100px" %>
-  <% else %>
-  <% end %>
-</p>
-
-<p>
-  <strong>Images:</strong>
-  <% if @profile.images.attached? %>
-    <% @profile.images.items do |image| %>
-      <%= image_tag "#{url_for(profile.avatar)}", style:"height:100px" %>
-    <% end %>
-  <% else %>
-    <%= "No images" %>
-  <% end %>
-</p>
 
 <p>
   <strong>Gender:</strong>
@@ -69,11 +56,6 @@
 <p>
   <strong>Time at home:</strong>
   <%= @profile.time_at_home %>
-</p>
-
-<p>
-  <strong>Destination city:</strong>
-  <%= @profile.destination_city %>
 </p>
 
 <p>

@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @users = User.all
+    render json: @users
   end
 
   # GET /users/1 or /users/1.json
@@ -33,6 +34,8 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+
+    render json: @user
   end
 
   # PATCH/PUT /users/1 or /users/1.json
@@ -46,6 +49,8 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+    
+    render json: @user
   end
 
   # DELETE /users/1 or /users/1.json

@@ -13,6 +13,7 @@ class ChatsController < ApplicationController
     chat_members.delete(current_user.id)
     @other_user_name = User.where(id: chat_members).first.profile.name
     @messages = @chat.messages
+    ActionCable.server.broadcast 'chat_chanel', 'test'
   end
 
   # GET /chats/new

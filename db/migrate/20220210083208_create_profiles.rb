@@ -4,7 +4,7 @@ class CreateProfiles < ActiveRecord::Migration[6.1]
       t.references :user, null: false
       t.string :name
       t.boolean :visibility
-      # t.string :photo
+      t.string :photo
       t.integer :age
       t.string :gender
       t.string :destination_city

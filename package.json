@@ -1,23 +1,28 @@
 {
   "name": "coliving-app",
   "private": true,
+  "proxy": "http://localhost:3000",
   "dependencies": {
     "@babel/preset-react": "^7.16.7",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.3",
+    "axios": "^0.27.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "prop-types": "^15.7.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "prop-types": "^15.8.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "^5.0.1",
     "turbolinks": "^5.2.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   },
+  "scripts": {
+    "start": "set PORT=4000 && react-scripts start"
+  },
   "version": "0.1.0",
   "devDependencies": {
-    "@babel/core": "^7.17.5",
     "webpack-dev-server": "^3"
   }
 }

@@ -18,21 +18,16 @@ class ProfileCard extends Component {
       .catch((error) => console.log(error));
   }
 
+  componentDidMount() {
+    this.loadProfiles();
+  }
+
+
 
   render() {
     return (
-      <div>
-        <div className="taskContainer">
-          <input
-            className="newTask"
-            type="text"
-            placeholder="Input a New Task and Press Enter"
-            maxLength="75"
-          />
-        </div>
-        <div className="wrapItems">
-          <ul className="listItems"></ul>
-        </div>
+      <div className="profileContainer">
+      hey
       </div>
     );
   }

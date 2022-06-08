@@ -58,7 +58,6 @@ def reset_db
   Rake::Task['db:migrate'].invoke
 end
 
-<<<<<<< HEAD
 def create_users_with_profiles
   @users_data.each do |user_data|
     user = create_user(user_data)
@@ -90,13 +89,11 @@ def create_profiles(user, user_data)
     instagram_link: user_data[:instagram_link]
   )
 
-  profile.avatar.attach(
-    io: File.open(user_data[:io]),
-    filename: user_data[:filename]
-  )
+  File.open('public/uploads/profile/avatar/1/thumb_1BE7D967-1BF5-4C85-B6BB-6C6077843C4A.jpeg') do |f|
+    profile.avatar = f
+  end
+end
 
-  profile
-=======
 def create_users
   i = 1
   10.times do
@@ -135,15 +132,6 @@ def create_messages
 
       puts "Message #{message_one.id} #{message_one.body} sent by user #{message_one.user.id} to chat #{message_one.chat.id}. Status #{status_one.status}"
     end
-  end
-end
-
-def create_profiles
-  users = User.all
-  users.each do |user|
-    profile = Profile.create!(user_id: user.id, name: 'Person')
-
-    # puts "Profile #{user.profile.id} created for user #{user.id}"
   end
 end
 

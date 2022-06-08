@@ -16,7 +16,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set PORT=4000 && react-scripts start",
+    "start": "PORT=4000 && react-scripts --max-http-header-size=16000 start",
+    "server": "nodemon index.js --ignore client",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

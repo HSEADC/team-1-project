@@ -23,6 +23,7 @@ class CreateProfiles < ActiveRecord::Migration[6.1]
       t.string :instagram_link
       t.string :vk_link
       t.string :facebook_link
+      t.string :avatar
 
       t.timestamps
     end

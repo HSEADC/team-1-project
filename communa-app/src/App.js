@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import './App.css'
 import Home from "./pages/Home"
 import Login from "./pages/Login"
+// import Feed from "./pages/Feed"
 
 function App() {
   return(

@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 2022_03_08_094810) do
     t.string "instagram_link"
     t.string "vk_link"
     t.string "facebook_link"
+    t.string "avatar"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"

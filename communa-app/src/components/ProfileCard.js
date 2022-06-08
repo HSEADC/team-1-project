@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
-
 class ProfileCard extends Component {
-  constructor(props) {
-    super(props);
+
+
+ constructor(props) {
+    super(props)
     this.state = {
       profiles: [],
     }
@@ -11,15 +12,15 @@ class ProfileCard extends Component {
 
   loadProfiles() {
     axios
-      .get("/api/v1/profiles")
+      .get("profiles")
       .then((res) => {
-        this.setState({ profiles: res.data });
+        this.setState({ profiles: res.data })
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
   }
 
   componentDidMount() {
-    this.loadProfiles();
+    this.loadProfiles()
   }
 
 
@@ -27,7 +28,11 @@ class ProfileCard extends Component {
   render() {
     return (
       <div className="profileContainer">
-      hey
+        {this.state.profiles.map((profile) => {
+          return (
+            <p>{profile.name}</p>
+          )
+        })}
       </div>
     );
   }
